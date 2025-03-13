@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholar Capsule</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Include jQuery for AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Flatpickr for date picker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Scholar Capsule Logo" onerror="this.src='{{ url_for('static', filename='img/placeholder.png') }}'">
+                <h1>Scholar Capsule</h1>
+            </div>
+            <div class="search-bar">
+                <form id="searchForm">
+                    <input type="text" id="searchQuery" placeholder="Search for a scholar...">
+                    <div class="date-container">
+                        <input type="text" id="datePicker" placeholder="Select a date">
+                    </div>
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </header>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Searching scholarly records...</p>
+        </div>
+
+        <div id="error" class="error hidden">
+            <p>Error: <span id="errorMessage"></span></p>
+        </div>
+
+        <main id="results" class="hidden">
+            <section class="author-profile">
+                <div class="author-header">
+                    <img id="author-photo" src="" alt="Author Photo" class="hidden">
+                    <div class="author-info">
+                        <h2 id="author-name"></h2>
+                        <p id="author-affiliation"></p>
+                        <p id="author-email" class="hidden"></p>
+                        <div class="citation-metrics">
+                            <div class="metric">
+                                <span class="metric-value" id="total-citations">0</span>
+                                <span class="metric-label">Citations</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value" id="h-index">0</span>
+                                <span class="metric-label">h-index</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value" id="i10-index">0</span>
+                                <span class="metric-label">i10-index</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="time-context">
+                    <p>Viewing as of: <span id="viewing-date"></span></p>
+                </div>
+            </section>
+
+            <section class="publications">
+                <h3>Publications</h3>
+                <div id="publications-list">
+                    <!-- Publications will be loaded here -->
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Scholar Capsule - View Google Scholar profiles as they were in the past</p>
+            <p class="disclaimer">This is not affiliated with Google or Google Scholar.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
